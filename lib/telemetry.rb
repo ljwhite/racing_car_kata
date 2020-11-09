@@ -18,7 +18,6 @@ class TelemetryDiagnostics
       @telemetry_client.connect(DIAGNOSTIC_CHANNEL_CONNECTION_STRING)
       retry_left -= 1
     end
-
     if not @telemetry_client.online_status
       raise Exception.new("Unable to connect.")
     end
