@@ -39,10 +39,15 @@ describe TelemetryDiagnostics do
 
     context 'when client is offline' do
       let(:status) { false }
+      let(:obj) { TelemetryDiagnostics.new}
+      let(:client) { TelemetryClient.new }
+      before do
+        allow_any_instance_of(TelemetryClient).to receive(:connect)
+      end
 
       it 'raises an exception' do
-        obj = TelemetryDiagnostics.new
         expect {obj.check_transmission}.to raise_error(Exception)
+        expect(client).to have_received(:connect).thrice
       end
     end
   end
